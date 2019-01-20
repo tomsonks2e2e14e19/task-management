@@ -10,25 +10,25 @@ import skinny.orm._
   */
 case class Message(id: Option[Long], body: String, createAt: ZonedDateTime, updateAt: ZonedDateTime)
 
-object Message extends SkinnyCRUDMapper[Task] {
+object Message extends SkinnyCRUDMapper[Message] {
 
   override def tableName = "messages"
 
-  override def defaultAlias: Alias[Task] = createAlias("m")
+  override def defaultAlias: Alias[Message] = createAlias("m")
 
-  override def extract(rs: WrappedResultSet, n: ResultName[Task]): Task =
+  override def extract(rs: WrappedResultSet, n: ResultName[Message]): Message =
     autoConstruct(rs, n)
 
-  private def toNamedValues(record: Task): Seq[(Symbol, Any)] = Seq(
+  private def toNamedValues(record: Message): Seq[(Symbol, Any)] = Seq(
     'body     -> record.body,
     'createAt -> record.createAt,
     'updateAt -> record.updateAt
   )
 
-  def create(message: Task)(implicit session: DBSession): Long =
+  def create(message: Message)(implicit session: DBSession): Long =
     createWithAttributes(toNamedValues(message): _*)
 
-  def update(message: Task)(implicit session: DBSession): Int =
+  def update(message: Message)(implicit session: DBSession): Int =
     updateById(message.id.get).withAttributes(toNamedValues(message): _*)
 
 }
