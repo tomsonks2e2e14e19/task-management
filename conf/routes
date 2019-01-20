@@ -4,7 +4,23 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                           controllers.Default.redirect(to = "/messages")
+
+#
+GET     /messages                   controllers.GetMessagesController.index
+#
+GET     /messages/:id/get           controllers.GetMessageController.index(id: Long)
+#
+GET     /messages/create            controllers.CreateMessageController.index
+#
+GET     /messages/:id/update        controllers.UpdateMessageController.index(id: Long)
+
+#
+POST    /messages/create            controllers.CreateMessageController.create
+#
+POST    /messages/update            controllers.UpdateMessageController.update
+#
+POST    /messages/:id/delete        controllers.DeleteMessageController.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
