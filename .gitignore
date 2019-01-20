@@ -10,3 +10,4 @@ target
 Thumbs.db
 # macOSユーザーのみ
 # .DS_Store
+env/
