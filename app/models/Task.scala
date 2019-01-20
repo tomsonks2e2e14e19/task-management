@@ -9,7 +9,7 @@ import skinny.orm._
   * Task
   */
 case class Task(id: Option[Long],
-                body: String,
+                content: String,
                 status: String,
                 deadline: ZonedDateTime,
                 completeAt: ZonedDateTime,
@@ -26,7 +26,7 @@ object Task extends SkinnyCRUDMapper[Task] {
     autoConstruct(rs, n)
 
   private def toNamedValues(record: Task): Seq[(Symbol, Any)] = Seq(
-    'body     -> record.body,
+    'content  -> record.content,
     'status   -> record.status,
     'deadline -> record.deadline,
     'completeAt -> record.completeAt,
